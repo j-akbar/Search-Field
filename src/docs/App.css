@@ -1,9 +1,9 @@
-.react-search-field-demo {
+.react-search-field {
   padding: 20px;
 }
 
 h3, h5 {
-  margin: 20px 0;
+  margin: 10px 0;
 }
 
 ul, li {
@@ -19,9 +19,14 @@ ul {
   border-bottom: 1px solid #ddd;
 }
 
+.text-field {
+  border: 6px solid #ddd;
+  width: 80%;
+}
+
 .list-example {
   border: 1px solid #ddd;
-  width: 400px;
+  width: 80%;
   margin: 15px 0;
   display: table;
 }
@@ -31,7 +36,33 @@ ul {
   flex-direction: column;
 }
 
-.github-button {
-  padding: 0 5px;
-  display: inline-block;
+.panel-header {
+  width: 80%;
+  background-color: aliceblue;
+}
+
+.panel-toggle {
+  width: 100%;
+  background-color: burlywood;
+}
+
+.card {
+  width:100%;
+  background-color: blanchedalmond;
+}
+
+.card {
+  width: 98%;
+  background-color: bisque;
+  margin:10px;
+}
+
+.star {
+  right: 4px;
+  position: absolute;
+}
+
+.point {
+  right: 18px;
+  position: absolute;
 }

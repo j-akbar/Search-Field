@@ -2,6 +2,10 @@ import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import TypeChecker from 'typeco';
 
+import { IconField } from "primereact/iconfield";
+import { InputIcon } from "primereact/inputicon";
+import { InputText } from "primereact/inputtext";
+
 const ENTER_KEY = 13;
 const SEARCH_BUTTON_EDGE = 35;
 
@@ -14,9 +18,9 @@ const searchFieldStyle = {
 
 const searchFieldButtonStyle = (disabled) => ({
   height: SEARCH_BUTTON_EDGE - 2, // reduces 2px because of top and bottom border
-  width: SEARCH_BUTTON_EDGE - 2,
+  width: "200px", // SEARCH_BUTTON_EDGE - 2,
   outline: 'none',
-  backgroundColor: 'white',
+  backgroundColor: 'blue',
   cursor: disabled ? 'auto' : 'pointer',
   padding: 5,
   boxSizing: 'border-box',
@@ -113,17 +117,20 @@ const SearchField = ({
       className={className}
       style={searchFieldStyle}
     >
-      <input
-        className="react-search-field-input"
-        style={searchFieldInputStyle}
-        onChange={onChangeHandler}
-        onKeyPress={onEnterHandler}
-        onBlur={onBlurHandler}
-        placeholder={placeholder}
-        type="text"
-        value={value}
-        disabled={disabled}
-      />
+      <IconField iconPosition="left">
+        <InputIcon className="pi pi-search"> </InputIcon>
+        <input
+          className="react-search-field-input"
+          style={searchFieldInputStyle}
+          onChange={onChangeHandler}
+          onKeyPress={onEnterHandler}
+          onBlur={onBlurHandler}
+          placeholder={placeholder}
+          type="text"
+          value={value}
+          disabled={disabled}
+        />
+      </IconField>
       <button
         className="react-search-field-button"
         type="button"
@@ -131,9 +138,11 @@ const SearchField = ({
         style={searchFieldButtonStyle(disabled)}
         onClick={onSearchClickHandler}
         disabled={disabled}
+        size="lg"
       >
-        <SearchIcon />
+        {/* <SearchIcon /> */} Search
       </button>
+      {/* <Button variant="contained">Contained</Button> */}
     </div>
   );
 };

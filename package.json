@@ -1,11 +1,11 @@
 {
   "name": "react-search-field",
-  "version": "2.0.1",
+  "version": "1.0",
   "description": "This is a simple search field component for react",
   "main": "dist/index.min.js",
   "scripts": {
     "build:component": "rm -rf dist/ && webpack -p --progress --config=webpack.production.config.js",
-    "build:docs": "rm -rf docs/ && webpack -p --progress",
+    "build:docs": "del docs && webpack -p --progress",
     "build": "npm run build:component && npm run build:docs",
     "start": "npm run build:docs && webpack-dev-server",
     "test": "jest",
@@ -24,7 +24,13 @@
     "url": "https://github.com/nutboltu/react-search-field.git"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^6.4.8",
+    "primeicons": "^7.0.0",
+    "primereact": "^10.9.3",
     "prop-types": "15.7.2",
+    "react-icons": "^5.5.0",
     "typeco": "1.0.0"
   },
   "devDependencies": {

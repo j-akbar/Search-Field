@@ -6,18 +6,55 @@ import TypeChecker from 'typeco';
 
 import SearchField from '../components/SearchField';
 import exampleSnippets from './exampleSnippets';
+import { Panel } from 'primereact/panel';
+import { Card } from 'primereact/card';
+
+import { FaRegStar, FaStar } from "react-icons/fa";
+        
 
 import './App.css';
 
 const exampleList = [
   {
-    name: 'Joe Smith',
-    email: 'joesmith@gmail.com',
+    name: 'Maimunah',
+    task: [{
+      name: 'Agama Islam',
+      description: 'Dasar pembelajaran agama Islam Al-Quran dan Hadis, Akidah, Akhlak, Fikih, Sejarah Peradaban Islam',
+      point: 12,
+    },{
+      name: 'Ilmu pengetahuan Sosial',
+      description: 'IPS adalah sekelompok disiplin akademis yang mempelajari aspek-aspek yang berhubungan dengan manusia dan lingkungan sosialnya',
+      point: 23,
+    },{
+      name: 'Ilmu pengetahuan Alam',
+      description: 'Pembelajaran ilmu pengetahuan alam merupakan konsep pembelajaran sains dengan situasi lebih alami dan situasi dunia nyata siswa serta mendorong siswa membuat hubungan antar cabang sains dan antara pengetahuan yang dimiliki oleh siswa dengan kehidupan sehari-hari',
+      point: 8,
+    }],
   },
   {
-    name: 'Alan Donald',
-    email: 'alan@gmail.com',
+    name: 'Karwanto',
+    task: [{
+      name: 'Ilmu pengetahuan Sosial',
+      description: 'IPS adalah sekelompok disiplin akademis yang mempelajari aspek-aspek yang berhubungan dengan manusia dan lingkungan sosialnya',
+      point: 54,
+    },{
+      name: 'Fisika',
+      description: 'Pembelajaran fisika adalah proses belajar mengenai gejala alam dan interaksinya, serta hubungan antara keduanya. Pembelajaran fisika bertujuan untuk mengembangkan kemampuan berpikir peserta didik.',
+      point: 32,
+    }],
   },
+  {
+    name: 'Dandi',
+    task: [{
+      name: 'Ilmu pengetahuan Sosial',
+      description: 'IPS adalah sekelompok disiplin akademis yang mempelajari aspek-aspek yang berhubungan dengan manusia dan lingkungan sosialnya',
+      point: 85,
+    },{
+      name: 'Agama Islam',
+      description: 'Dasar pembelajaran agama Islam Al-Quran dan Hadis, Akidah, Akhlak, Fikih, Sejarah Peradaban Islam',
+      point: 10,
+    }],
+  }
 ];
 
 const getMatchedList = (searchText) => {
@@ -25,21 +62,36 @@ const getMatchedList = (searchText) => {
   return exampleList.filter((item) => item.name.toLowerCase().includes(searchText.toLowerCase()));
 };
 
+
+
+
 const ExampleList = (props) => (
-  <div className="list-example">
-    <div className="list-header">
-      <ul>
-        <li> Name </li>
-        <li> Email </li>
-      </ul>
-    </div>
+  <div>
     <div className="list-body">
       {
         props.list.map((item, index) => (
-          <ul key={index}>
-            <li> {item.name} </li>
-            <li> {item.email} </li>
-          </ul>))
+          <Panel toggleable className='panel-toggle'>
+              <b>{item.name} </b> ({item.task.length})
+              <Card className='card'>
+              {(() => {
+                const item_list = [];   
+                for (let i = 0; i < item.task.length; i++) {
+                  item_list.push(
+                    <Card className='card2'>
+                      <p><b>{item.task[i].name}</b></p>
+                      {item.task[i].description}
+                      <span className='star'>{item.task[i].point}<FaStar /></span>
+                    </Card>
+                  );
+                }
+
+                return (
+                  <div>{item_list}</div>
+                )
+              })()}
+              </Card>
+            </Panel>
+          ))
       }
     </div>
   </div>
@@ -49,27 +101,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      basicExampleList: [...exampleList],
-      onEnterExampleList: [...exampleList],
       onSearchClickExampleList: [...exampleList],
-      onBlurExampleList: [...exampleList],
     };
-    this.onBasicExampleChange = this.onBasicExampleChange.bind(this);
-    this.onEnterExample = this.onEnterExample.bind(this);
     this.onSearchClickExample = this.onSearchClickExample.bind(this);
-    this.onBlurExample = this.onBlurExample.bind(this);
-  }
-
-  onBasicExampleChange(value) {
-    this.setState({
-      basicExampleList: getMatchedList(value),
-    });
-  }
-
-  onEnterExample(value) {
-    this.setState({
-      onEnterExampleList: getMatchedList(value),
-    });
   }
 
   onSearchClickExample(value) {
@@ -78,100 +112,17 @@ class App extends Component {
     });
   }
 
-  onBlurExample(value) {
-    this.setState({
-      onBlurExampleList: getMatchedList(value),
-    });
-  }
-
   render() {
     return (
-      <div className="react-search-field-demo container">
+      <div className="react-search-field">
         <div>
-          <h3>React Search Field</h3>
-          <div className="github-button">
-            <GitHubButton
-              href="https://github.com/nutboltu/react-search-field"
-              data-icon="octicon-star"
-              data-show-count="true"
-              aria-label="Star nutboltu/react-search-field on GitHub">
-                Star
-            </GitHubButton>
-          </div>
-          <div className="github-button">
-            <GitHubButton
-              href="https://github.com/nutboltu/react-search-field/issues"
-              data-icon="octicon-issue-opened"
-              data-show-count="true"
-              aria-label="Issue nutboltu/react-search-field on GitHub">
-                Issue
-            </GitHubButton>
-          </div>
-          <div className="github-button">
-            <GitHubButton
-              href="https://github.com/sponsors/nutboltu"
-              data-icon="octicon-heart"
-              aria-label="Sponsor @nutboltu on GitHub">
-                Sponsor
-            </GitHubButton>
-          </div>
-        </div>
-        <div>
-          <h5>Installation </h5>
-          <SyntaxHighlighter style={github}>
-            {exampleSnippets.installation}
-          </SyntaxHighlighter>
-        </div>
-        <div>
-          <h5>Basic Example </h5>
-          <SyntaxHighlighter style={github}>
-            {exampleSnippets.basicExample}
-          </SyntaxHighlighter>
+          <h5>Input Username </h5>
           <SearchField
-            placeholder="Search item"
-            onChange={this.onBasicExampleChange}
-          />
-          <ExampleList
-            list={this.state.basicExampleList}
-          />
-        </div>
-        <div>
-          <h5>Example: onEnter </h5>
-          <SyntaxHighlighter style={github}>
-            {exampleSnippets.onEnterExample}
-          </SyntaxHighlighter>
-          <SearchField
-            placeholder="Search item"
-            onEnter={this.onEnterExample}
-          />
-          <ExampleList
-            list={this.state.onEnterExampleList}
-          />
-        </div>
-        <div>
-          <h5>Example: onSearchClick  </h5>
-          <SyntaxHighlighter style={github}>
-            {exampleSnippets.onSearchClickExample}
-          </SyntaxHighlighter>
-          <SearchField
-            placeholder="Search item"
+            placeholder="Enter Username"
             onSearchClick={this.onSearchClickExample}
           />
           <ExampleList
             list={this.state.onSearchClickExampleList}
-          />
-        </div>
-        <div>
-          <h5>Example: onBlur  </h5>
-          <SyntaxHighlighter style={github}>
-            {exampleSnippets.onBlurExample}
-          </SyntaxHighlighter>
-          <SearchField
-            placeholder="Search item"
-            onBlur={this.onBlurExample}
-          />
-          <ExampleList
-            list={this.state.onBlurExampleList}
           />
         </div>
       </div>
